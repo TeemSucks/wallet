@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJNMS - The next Apple Inc.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            color: #333;
+        }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.top-bar {
+    background-color: #f5f5f7;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo a {
+    color: #333;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu a {
+    color: #333;
+    text-decoration: none;
+    padding: 8px 15px;
+    transition: color 0.3s;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.actions a {
+    color: #333;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .nav-menu li {
+        margin: 10px 0;
+    }
+
+    .actions {
+        margin-top: 10px;
+    }
+}
+
+
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas#webgl-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons button {
+            padding: 1rem 2rem;
+            margin: 0 1rem;
+            font-size: 1rem;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-buttons button:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 2rem;
+            text-align: center;
+            background-color: #f9f9f9;
+            min-height: 100vh;
+            opacity: 0;
+            transform: translateY(100vh);
+            transition: all 0.8s ease;
+            z-index: 2;
+            position: relative;
+	}
+
+        .content.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+	
+	#scrollingQuotes {
+            height: 100px;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .quotes-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 15s linear infinite;
+        }
+
+        .quote {
+            display: inline-block;
+            margin: 0 30px;
+            font-style: italic;
+            font-size: 1.2em;
+            /*text-align: center;*/
+	    background-color: #fff;
+	    height: 100px;
+	    border: 2px solid #ccc;
+	    border-radius: 15px;
+	    padding: 15px
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Please don't look at this.. the code is a mess -->
+    <header class="top-bar">
+        <div class="logo">
+            <a href="#">DJNMS</a>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="https://example.com/">Wallet</a></li>
+                <li><a href="https://example.com/">Phone</a></li>
+                <li><a href="https://example.com/">Watch</a></li>
+                <li><a href="https://example.com/">Thing</a></li>
+                <li><a href="./support">Support</a></li>
+            </ul>
+        </nav>
+        <div class="actions">
+            <a href="https://example.com/" class="search">🔍</a>
+            <a href="https://example.com/" class="cart">🛒</a>
+        </div>
+    </header>
+    <div class="hero">
+        <canvas id="webgl-grid"></canvas>
+        <div class="hero-text">
+            <h1>Self-Defence Wallet</h1>
+            <p>Revolutionising wallets forever.</p>
+            <div class="hero-buttons">
+                <button onclick="document.location.href = './buy.html'">Buy now!</button>
+		<button onclick="window.scrollBy({ top: 1000, behavior: 'smooth' })">Read more.</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h2>Dont beleve us?</h2>
+	<p>Have a look at what others are saying!</p>
+	<br />
+
+	    <div id="scrollingQuotes">
+        <div class="quotes-content">
+		<div class="quote">"I would rather get attacked then buy this."<br />– Evelyn</div>
+		<div class="quote">"Amazing product, works perfectly."<br />– Very real person</div>
+		<div class="quote">"MORE QUOTES."<br />– Quote Lover</div>
+		<div class="quote">"hiii."<br />– Some Dude</div>
+		<div class="quote">"I... am steve."<br />– Steve</div>
+		<div class="quote">"I'm bored."<br />- Me</div>
+		<div class="quote">"I was forced to make this site.."<br/>- Evelyn</div>
+		<div class="quote">"I use arch btw."<br />-Evelyn</div>
+        </div>
+    </div>
+
+        <script>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script>
+        const quotesContent = document.querySelector('.quotes-content');
+        quotesContent.innerHTML += quotesContent.innerHTML;
+
+        const containerWidth = document.getElementById('scrollingQuotes').offsetWidth;
+        const contentWidth = quotesContent.scrollWidth / 3;
+        const scrollDuration = (contentWidth / 50);
+
+        quotesContent.style.animationDuration = `${scrollDuration}s`;
+
+    	const canvas = document.querySelector('#webgl-grid');
+
+    	const scene = new THREE.Scene();
+    	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    	const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    	renderer.setSize(window.innerWidth, window.innerHeight);
+    	renderer.setPixelRatio(window.devicePixelRatio);
+    	renderer.setClearColor(0xffffff);
+
+    	window.addEventListener('resize', () => {
+        	const width = window.innerWidth;
+        	const height = window.innerHeight;
+        	renderer.setSize(width, height);
+        	camera.aspect = width / height;
+        	camera.updateProjectionMatrix();
+        	console.log(`Renderer resized: ${width}x${height}`);
+    	});
+
+    	const gridSize = 5000;
+    	const divisions = 1000;
+    	const gridColor = new THREE.Color(0xd3d3d3);
+
+    	const gridLines = new THREE.BufferGeometry();
+    	const points = [];
+
+    	for (let i = -gridSize; i <= gridSize; i += gridSize / divisions) {
+        	points.push(-gridSize, 0, i);
+        	points.push(gridSize, 0, i);
+
+        	points.push(i, 0, -gridSize);
+        	points.push(i, 0, gridSize);
+    	}
+
+    	gridLines.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+
+   	const lineMaterial = new THREE.LineBasicMaterial({ color: gridColor });
+
+    	const grid = new THREE.LineSegments(gridLines, lineMaterial);
+    	scene.add(grid);
+
+
+    	camera.position.set(0, 20, 50);
+    	camera.lookAt(0, 0, 0);
+    	console.log(`Camera position set to: ${camera.position.x}, ${camera.position.y}, ${camera.position.z}`);
+
+   	let targetX = 0;
+    	let targetY = 0;
+
+    	document.addEventListener('mousemove', (event) => {
+        	targetX = (event.clientX / window.innerWidth) * 2 - 1;
+       		targetY = (event.clientY / window.innerHeight) * 2 - 1;
+        	console.log(`Mouse position: ${targetX}, ${targetY}`);
+    	});
+
+    	function animate() {
+        	requestAnimationFrame(animate);
+
+        	grid.rotation.x = targetY * 0.1;
+        	grid.rotation.y = targetX * 0.1;
+
+        	renderer.render(scene, camera);
+   	 }
+
+    	animate();
+
+    	window.addEventListener('scroll', function () {
+        	const content = document.querySelector('.content');
+        	const scrollTop = window.scrollY;
+        	console.log(`Scroll position: ${scrollTop}`);
+        	if (scrollTop > 50) {
+            		content.classList.add('show');
+       		} else {
+           		content.classList.remove('show');
+        	}
+   	});
+</script>
+</body>
+</html>
+
